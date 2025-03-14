@@ -7,7 +7,7 @@ public class PlayerCotroller : MonoBehaviour
     public int direction = 1;
     public float playerSpeed = 4.5f;
     private float inputHorizontal;
-    public float jumpForce = 10;
+    private float jumpForce = 12;
     private Rigidbody2D rigidBody;
     private GroundSensor _groundSensor;
     

@@ -15280,8 +15280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   playerSpeed: 4.5
-  jumpForce: 10
-  groundSensor: {fileID: 0}
 --- !u!61 &517957480
 BoxCollider2D:
   m_ObjectHideFlags: 0
