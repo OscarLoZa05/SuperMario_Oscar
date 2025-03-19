@@ -10,9 +10,13 @@ public class CameraMovement : MonoBehaviour
     public Vector2 minPosition;
     public float interpolationRatio = 0.5f;
 
-    void Start()
+    void Awake()
     {
-        
+        //Busca un objeto por el nombre en la jerarquia
+        /*playerTransform = GameObject.Find("Mario_0").GetComponent<Transform>();//con el transform no hace falta poner el GetComponent*/
+
+        //Buscar un objeto por el tag
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     

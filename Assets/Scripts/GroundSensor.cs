@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class GroundSensor : MonoBehaviour
 {
-    public bool isGorunded;
+    public bool isGrounded;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        isGorunded = true;
+        if(collider.gameObject.layer == 3)
+        {
+            isGrounded = true;
+            /*Debug.Log(collider.gameObject.name);*/
+        }
+        
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        isGorunded = false;
+        if(collider.gameObject.layer == 3)
+        {
+            isGrounded = false;
+        }
     }
     void OnTriggerStay2D(Collider2D collider)
     {
-        isGorunded = true;
+        if(collider.gameObject.layer == 3)
+        {
+            isGrounded = true;
+        }
     }
 }
