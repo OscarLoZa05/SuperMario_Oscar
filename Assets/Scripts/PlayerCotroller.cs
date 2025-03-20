@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCotroller : MonoBehaviour
 {
     //public int direction = 1;
-    private float playerSpeed = 4.5f;
+    public float playerSpeed = 4.9f;
     private float inputHorizontal;
     private float jumpForce = 13.1f;
     private Rigidbody2D rigidBody; //componente del Mario variable de componentes
@@ -15,7 +15,7 @@ public class PlayerCotroller : MonoBehaviour
     private AudioSource _audioSource;
     
     public AudioClip jumpSFX;
-
+    
     
     void Awake() //función de unity 
     {
