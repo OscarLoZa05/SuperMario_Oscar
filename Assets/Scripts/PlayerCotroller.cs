@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerCotroller : MonoBehaviour
 {
     //public int direction = 1;
-    public float playerSpeed = 4.9f;
+    private float playerSpeed = 4.9f;
     private float inputHorizontal;
-    private float jumpForce = 13.1f;
+    private float jumpForce = 11f;
     private Rigidbody2D rigidBody; //componente del Mario variable de componentes
     private GroundSensor _groundSensor;
     private SpriteRenderer _spriteRendered;
@@ -41,6 +41,7 @@ public class PlayerCotroller : MonoBehaviour
         {
             Jump();
         }
+        
 
         Movement();
 
