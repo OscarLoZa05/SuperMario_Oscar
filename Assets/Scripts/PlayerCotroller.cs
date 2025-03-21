@@ -7,9 +7,12 @@ public class PlayerCotroller : MonoBehaviour
     //public int direction = 1;
     private float playerSpeed = 4.9f;
     private float inputHorizontal;
-    private float jumpForce = 11f;
+    private float jumpForce = 13f;
+
     private Rigidbody2D rigidBody; //componente del Mario variable de componentes
+    
     private GroundSensor _groundSensor;
+
     private SpriteRenderer _spriteRendered;
     private Animator _animator;
     private AudioSource _audioSource;
@@ -92,6 +95,7 @@ public class PlayerCotroller : MonoBehaviour
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
+        _audioSource.volume = 0.5f;
         _audioSource.PlayOneShot(jumpSFX);
     }
 }
