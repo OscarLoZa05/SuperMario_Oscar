@@ -14891,6 +14891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSFX: {fileID: 8300000, guid: 9130db9c5beecd24bbf36f425d5a1717, type: 3}
+  deathSFX: {fileID: 8300000, guid: 61e2a629c7bf9164199e62da259ca5bc, type: 3}
 --- !u!61 &517957480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20451,7 +20452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916769333d2ae7544a396797fd5ad94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathSFX: {fileID: 0}
+  _deathSFX: {fileID: 8300000, guid: 08dd6d7ad013cc54bb2d4b4a28f1173f, type: 3}
   direction: 1
   speed: 2
 --- !u!82 &723525230
@@ -29351,8 +29352,8 @@ Transform:
   m_GameObject: {fileID: 1104051707}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.875, y: 0, z: 0}
-  m_LocalScale: {x: 206.2544, y: 32.000145, z: 1}
+  m_LocalPosition: {x: -9.1274, y: 0, z: 0}
+  m_LocalScale: {x: 208.75008, y: 32.000145, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 938799599}
@@ -31057,6 +31058,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1170622478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1170622480}
+  - component: {fileID: 1170622479}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1170622479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170622478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c445f9ae0ca39034abfebb5dded65453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlaying: 1
+--- !u!4 &1170622480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170622478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -65.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174247835
 GameObject:
   m_ObjectHideFlags: 0
@@ -35275,7 +35321,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.26}
+  m_Size: {x: 0.66, y: 0.26}
   m_EdgeRadius: 0
 --- !u!1001 &1378956592
 PrefabInstance:
@@ -49545,6 +49591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1975092335}
   - component: {fileID: 1975092334}
+  - component: {fileID: 1975092336}
   m_Layer: 0
   m_Name: BGM Manager
   m_TagString: Untagged
@@ -49559,10 +49606,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975092333}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e969f8aa4a2b679469fab05af6fdc049, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -49681,6 +49728,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1975092336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975092333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7026f9c5dcccb2c4ea8fbbe17117b895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: e969f8aa4a2b679469fab05af6fdc049, type: 3}
+  gameOver: {fileID: 8300000, guid: 2bf705db270b62d48add9c3c0f1e2ec8, type: 3}
+  delay: 2
+  timer: 0
 --- !u!1 &1989773476
 GameObject:
   m_ObjectHideFlags: 0
@@ -53141,10 +53204,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ladrillos_0
       objectReference: {fileID: 0}
-    - target: {fileID: 7079930441929976618, guid: 27999fb4e5e027f47afb855b5a86fdba, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53168,3 +53227,4 @@ SceneRoots:
   - {fileID: 720997431}
   - {fileID: 1975092335}
   - {fileID: 1368053743}
+  - {fileID: 1170622480}

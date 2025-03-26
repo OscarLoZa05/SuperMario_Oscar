@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     public Vector3 offset;
     public Vector2 maxPosition;
     public Vector2 minPosition;
-    public float interpolationRatio = 0.5f;
+    public float interpolationRatio = 0.15f;
 
     void Awake()
     {
@@ -22,6 +22,22 @@ public class CameraMovement : MonoBehaviour
     
     void FixedUpdate()
     {
+        /*if(playerTransform != null)
+        {
+            Vector3 desiredPosition = playerTransform.position + offset;
+            float clampX = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
+            float clampY = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);
+            Vector3 clampedPosition = new Vector3(clampX, clampY, desiredPosition.z);
+
+            Vector3 lerpedPosition = Vector3.Lerp(transform.position, clampedPosition, interpolationRatio);
+
+            transform.position = lerpedPosition;
+        }*/
+        
+        if(playerTransform == null)
+        {
+            return;
+        }
         Vector3 desiredPosition = playerTransform.position + offset;
         float clampX = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
         float clampY = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);

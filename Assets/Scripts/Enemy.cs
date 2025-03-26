@@ -23,8 +23,6 @@ public float speed = 5;
 
     }
 
-    
-
     void Update()
     {
         
@@ -50,7 +48,10 @@ public float speed = 5;
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            Destroy(collision.gameObject);
+            
+            //Destroy(collision.gameObject);
+            PlayerCotroller playerScript = collision.gameObject.GetComponent<PlayerCotroller>();
+            playerScript.Death();
         }
     }
 }

@@ -15,9 +15,13 @@ public class PlayerCotroller : MonoBehaviour
 
     private SpriteRenderer _spriteRendered;
     private Animator _animator;
-    private AudioSource _audioSource;
+    private BoxCollider2D _boxCollider2D;
+    private GameManager _gameManager;
+    private SoundManager _soundManager;
     
+    private AudioSource _audioSource;
     public AudioClip jumpSFX;
+    public AudioClip deathSFX;
     
     
     void Awake() //función de unity 
@@ -27,17 +31,25 @@ public class PlayerCotroller : MonoBehaviour
         _spriteRendered = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        _boxCollider2D = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
     }
     // Start is called before the first frame update
     void Start()
     {
         //Esto teletransporta al personaje
-        //transform.position = new Vector3 (-108.75f,-5.5f, 0);    
+        //transform.position = new Vector3 (-108.75f,-5.5f, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!_gameManager.isPlaying)
+        {
+            return;
+        }
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         
         if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded) //dos == es para comprobar, un = es para dar valor //si pongo !_groundSensor.isGorunded es para verificar si es falso si pone solo _groundSensor.isGorunded es para verificar si es verdadero
@@ -97,6 +109,25 @@ public class PlayerCotroller : MonoBehaviour
         _animator.SetBool("IsJumping", true);
         _audioSource.volume = 0.5f;
         _audioSource.PlayOneShot(jumpSFX);
+    }
+
+    public void Death()
+    {
+        _animator.SetTrigger("IsDead");
+        _audioSource.PlayOneShot(deathSFX);
+        _boxCollider2D.enabled = false;
+        rigidBody.gravityScale = 0;
+
+        Destroy(_groundSensor.gameObject);
+        
+        inputHorizontal = 0;
+        rigidBody.velocity = Vector2.zero;
+
+        //_soundManager.Invoke("DeathBGM", deathSFX.lenght);
+
+        _gameManager.isPlaying = false;
+
+
     }
 }
 
