@@ -12,7 +12,7 @@ private Rigidbody2D _rigidBody;
 private BoxCollider2D _boxCollider2D;
 
 public int direction = 1;
-public float speed = 5;
+public float speed = 3;
 
     void Awake()
     {
@@ -23,6 +23,10 @@ public float speed = 5;
 
     }
 
+    void Start()
+    {
+        speed = 0;
+    }
     void Update()
     {
         
@@ -44,8 +48,12 @@ public float speed = 5;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        direction *= -1;
-
+        
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6); /*esto || es "o"*/
+        {
+            direction *= -1;
+        }
+        
         if(collision.gameObject.CompareTag("Player"))
         {
             
@@ -54,6 +62,17 @@ public float speed = 5;
             playerScript.Death();
         }
     }
+
+    void OnBecameVisible()
+    {
+        speed = 3;
+    }
+
+    void OnBecameInvisible()
+    {
+        speed = 0;
+    }
 }
+
 
 

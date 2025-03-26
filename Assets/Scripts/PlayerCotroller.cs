@@ -49,6 +49,10 @@ public class PlayerCotroller : MonoBehaviour
         {
             return;
         }
+        if(_gameManager._isPaused)
+        {
+            return;
+        }
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         
@@ -116,16 +120,21 @@ public class PlayerCotroller : MonoBehaviour
         _animator.SetTrigger("IsDead");
         _audioSource.PlayOneShot(deathSFX);
         _boxCollider2D.enabled = false;
-        rigidBody.gravityScale = 0;
+        //rigidBody.gravityScale = 0;
 
         Destroy(_groundSensor.gameObject);
         
         inputHorizontal = 0;
         rigidBody.velocity = Vector2.zero;
-
+        
+        rigidBody.AddForce(Vector2.up * jumpForce/1.5f, ForceMode2D.Impulse);
+        
+        StartCoroutine(_soundManager.DeathBGM());
+        
         //_soundManager.Invoke("DeathBGM", deathSFX.lenght);
 
         _gameManager.isPlaying = false;
+        Destroy(gameObject, 2);
 
 
     }

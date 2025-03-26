@@ -41,6 +41,23 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
+    public void PauseBGM()
+    {
+        if(_gameManager._isPaused)
+        {
+            _audioSource.Pause();
+        }
+        else
+        {
+            _audioSource.Play();
+        }
+        
+    }
+
+    /*public void ReanudeBGM()
+    {
+        _audioSource.Play();
+    }*/
     /*public void DeathBGM()
     {
         _audioSource.Stop();
@@ -58,7 +75,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource.Stop();
         yield return new WaitForSeconds(delay);
-        _audioSource-PlayOneShot(gameOver);
+        _audioSource.PlayOneShot(gameOver);
     }
 
 
