@@ -28,10 +28,10 @@ public class SoundManager : MonoBehaviour
     
     void Update()
     {
-        if(!_gameManager.isPlaying && !timerFinished)
+        /*if(!_gameManager.isPlaying && !timerFinished)
         {
             DeathBGM();
-        }      
+        }*/    
     }
 
     void PlayBGM()
@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    public void DeathBGM()
+    /*public void DeathBGM()
     {
         _audioSource.Stop();
 
@@ -52,8 +52,14 @@ public class SoundManager : MonoBehaviour
             timerFinished = true;
             _audioSource.PlayOneShot(gameOver);
         }
-    }
+    }*/
 
+    public IEnumerator DeathBGM()
+    {
+        _audioSource.Stop();
+        yield return new WaitForSeconds(delay);
+        _audioSource-PlayOneShot(gameOver);
+    }
 
 
 
