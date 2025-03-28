@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
    
     void Start()
     {
-        _rigidBody.AddForce(Vector2.right * bulletForce, ForceMode2D.Impulse);
+        _rigidBody.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

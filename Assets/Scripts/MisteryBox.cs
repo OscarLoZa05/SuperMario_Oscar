@@ -10,6 +10,9 @@ public class MisteryBox : MonoBehaviour
     public AudioClip _misteryBoxSFX;
     public AudioClip _misteryBoxOpenSFX;
     private bool  _isOpen = false;
+    public Transform mushroomSpawn;
+    public GameObject mushroomPrefab;
+    public AudioClip _mushroomSFX;
     
 
     void Awake()
@@ -25,8 +28,13 @@ public class MisteryBox : MonoBehaviour
             _animator.SetTrigger("OpenBox");
             
             _audioSource.clip = _misteryBoxSFX;
-
+            
+            Mushroom();
+            
             _isOpen = true;
+
+            
+
         }
         else
         {
@@ -42,5 +50,10 @@ public class MisteryBox : MonoBehaviour
         {
             ActivatedBox();
         }
-    }    
+    } 
+
+    void Mushroom()
+    {
+        Instantiate(mushroomPrefab, mushroomSpawn.position, mushroomSpawn.rotation);
+    }   
 }

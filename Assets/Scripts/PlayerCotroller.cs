@@ -8,6 +8,12 @@ public class PlayerCotroller : MonoBehaviour
     private float playerSpeed = 4.9f;
     private float inputHorizontal;
     private float jumpForce = 13f;
+    public float powerUpDuration = 10f;
+    public float powerUpTimer;
+    
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+    public bool canShoot = false;
 
     private Rigidbody2D rigidBody; //componente del Mario variable de componentes
     
@@ -22,6 +28,8 @@ public class PlayerCotroller : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip jumpSFX;
     public AudioClip deathSFX;
+    public AudioClip shootSFX;
+
     
     
     void Awake() //función de unity 
@@ -78,7 +86,20 @@ public class PlayerCotroller : MonoBehaviour
         //transform.position = new Vector3(transform.position.x + direction * playerSpeed * Time.deltaTime, transform.position.y, transform.position.z);
         //transform.Translate(new Vector3(direction * playerSpeed * Time.deltaTime, 0, 0));
         //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + inputHorizontal, transform.position.y), playerSpeed * Time.deltaTime);
+
+        if(Input.GetButtonDown("Fire1") && canShoot)
+        {
+            Shoot();
+        }
+
+
+        if(canShoot)
+        {
+            PowerUp();
+        }
         
+
+
     }
     
     void FixedUpdate()
@@ -93,12 +114,12 @@ public class PlayerCotroller : MonoBehaviour
     {
         if(inputHorizontal > 0) //input siempre en el UPDATE
         {
-            _spriteRendered.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             _animator.SetBool("IsRunning", true);
         }
         else if(inputHorizontal < 0) //si lo de arriba se cumple no hace falta que compruebes esto
         {
-            _spriteRendered.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             _animator.SetBool("IsRunning", true);
         }
         else //si no se cumple ninguna de las condiciones (if y else if) se cumoke el "else"
@@ -135,8 +156,22 @@ public class PlayerCotroller : MonoBehaviour
 
         _gameManager.isPlaying = false;
         Destroy(gameObject, 2);
+    }
 
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        _audioSource.PlayOneShot(shootSFX);
+    }
 
+    void PowerUp()
+    {
+        powerUpTimer += Time.deltaTime;
+        if(powerUpTimer >= powerUpDuration)
+        {
+            canShoot = false;
+            powerUpTimer = 0;
+        }
     }
 }
 
