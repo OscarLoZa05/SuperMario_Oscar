@@ -132,7 +132,7 @@ public class PlayerCotroller : MonoBehaviour
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
-        _audioSource.volume = 0.5f;
+        //_audioSource.volume = 0.5f;
         _audioSource.PlayOneShot(jumpSFX);
     }
 
