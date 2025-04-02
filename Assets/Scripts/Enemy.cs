@@ -49,7 +49,7 @@ public float speed = 3;
     void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6) /*esto || es "o"*/
+        if(collision.gameObject.CompareTag("Tuberia") || collision.gameObject.layer == 6 || collision.gameObject.layer == 8) /*esto || es "o"*/
         {
             direction *= -1;
         }

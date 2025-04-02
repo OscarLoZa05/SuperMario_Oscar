@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip bgm;
     public AudioClip gameOver;
+    public bool IsFinished = false;
 
     private GameManager _gameManager;
     public float delay = 2;
@@ -43,7 +44,7 @@ public class SoundManager : MonoBehaviour
 
     public void PauseBGM()
     {
-        if(_gameManager._isPaused)
+        if(_gameManager._isPaused || IsFinished)
         {
             _audioSource.Pause();
         }
