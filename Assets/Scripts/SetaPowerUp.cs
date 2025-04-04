@@ -43,6 +43,7 @@ public class SetaPowerUp : MonoBehaviour
         {
             PlayerCotroller playerScript = collision.gameObject.GetComponent<PlayerCotroller>();
             playerScript.canShoot = true;
+            playerScript.powerUpTimer = 0;
             Interact();
         }
 

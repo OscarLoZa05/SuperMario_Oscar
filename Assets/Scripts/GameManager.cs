@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool _isPaused = false;
     private SoundManager _soundManager;
     public GameObject pauseCanvas;
+    public GameObject optionCanvas;
 
     private int coins = 0;
     public Text coinsText;
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
             _isPaused = false;
             _soundManager.PauseBGM();
             pauseCanvas.SetActive(false);
+            optionCanvas.SetActive(false);
+
         }
         
         else

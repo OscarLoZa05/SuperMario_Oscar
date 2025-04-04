@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,11 +9,18 @@ public class Enemy : MonoBehaviour
 private Animator _animator;
 private AudioSource _audioSource;
 public AudioClip _deathSFX;
+public AudioClip _damageSFX;
 private Rigidbody2D _rigidBody;
 private BoxCollider2D _boxCollider2D;
+private Slider _healthBar;
+private SpriteRenderer _spriteRendered;
 
 public int direction = 1;
 public float speed = 3;
+
+public float maxHealth = 20;
+private float currentHealth;
+
 
     void Awake()
     {
@@ -20,12 +28,19 @@ public float speed = 3;
         _audioSource = GetComponent<AudioSource>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
+        _healthBar = GetComponentInChildren<Slider>();
+        _spriteRendered = GetComponent<SpriteRenderer>();
 
     }
 
     void Start()
     {
         speed = 0;
+
+        currentHealth = maxHealth;
+        _healthBar.maxValue = maxHealth;
+        _healthBar.value = maxHealth;
+    
     }
     void Update()
     {
@@ -43,7 +58,21 @@ public float speed = 3;
         _rigidBody.gravityScale = 0;
         _animator.SetTrigger("IsDead");
         _boxCollider2D.enabled = false;
-        Destroy(gameObject, 0.3f);
+        _audioSource.PlayOneShot(_deathSFX);
+        Destroy(gameObject, 1f);
+    }
+
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth-= damage;
+        _healthBar.value = currentHealth;
+        _audioSource.PlayOneShot(_damageSFX);
+
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

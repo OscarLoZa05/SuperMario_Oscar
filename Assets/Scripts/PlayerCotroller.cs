@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerCotroller : MonoBehaviour
 {
     //public int direction = 1;
     private float playerSpeed = 4.9f;
     private float inputHorizontal;
     private float jumpForce = 13f;
-    public float powerUpDuration = 10f;
+    public float powerUpDuration = 100000f;
     public float powerUpTimer;
     
     public Transform bulletSpawn;
@@ -24,6 +24,7 @@ public class PlayerCotroller : MonoBehaviour
     private BoxCollider2D _boxCollider2D;
     private GameManager _gameManager;
     private SoundManager _soundManager;
+    public Image powerUpImage;
     
     private AudioSource _audioSource;
     public AudioClip jumpSFX;
@@ -167,6 +168,7 @@ public class PlayerCotroller : MonoBehaviour
     void PowerUp()
     {
         powerUpTimer += Time.deltaTime;
+        powerUpImage.fillAmount = Mathf.InverseLerp(powerUpDuration, 0, powerUpTimer);
         if(powerUpTimer >= powerUpDuration)
         {
             canShoot = false;
