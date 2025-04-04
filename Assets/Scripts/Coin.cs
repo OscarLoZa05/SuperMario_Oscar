@@ -10,6 +10,8 @@ public class Coin : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip coinSFX;
     private SpriteRenderer _spriteRendered;
+
+    private GameManager _gameManager;
     
     void Awake()
     {
@@ -17,6 +19,7 @@ public class Coin : MonoBehaviour
        _boxCollider2D = GetComponent<BoxCollider2D>();
        _audioSource = GetComponent<AudioSource>();
        _spriteRendered = GetComponent<SpriteRenderer>();
+       _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
  
@@ -24,11 +27,17 @@ public class Coin : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Player"))
         {
-            _spriteRendered.enabled = false;
-            _audioSource.PlayOneShot(coinSFX);
-            Destroy(gameObject, 1f);
-
+            TakeCoin();          
         }
     }
 
+    void TakeCoin()
+    {
+        _boxCollider2D.enabled = false;
+        _gameManager.AddCoins();
+        _spriteRendered.enabled = false;
+        _audioSource.PlayOneShot(coinSFX);
+        Destroy(gameObject, 1f);
+        
+    }
 }
