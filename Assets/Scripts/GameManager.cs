@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int coins = 0;
     public Text coinsText;
+    private int goombaNumber = 0;
+    public Text goombaText;
 
     void Awake()
     {
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         coinsText.text = "Coins: " + coins.ToString();
+        goombaText.text = "x" + goombaNumber.ToString();
     }
     
     void Update()
@@ -68,6 +71,12 @@ public class GameManager : MonoBehaviour
     {
         coins++;
         coinsText.text = "Coins: " + coins.ToString(); 
+    }
+
+    public void AddGoomba()
+    {
+        goombaNumber++;
+        goombaText.text = "x" + goombaNumber.ToString();
     }
 
 

@@ -14,6 +14,7 @@ private Rigidbody2D _rigidBody;
 private BoxCollider2D _boxCollider2D;
 private Slider _healthBar;
 private SpriteRenderer _spriteRendered;
+private GameManager _gameManager;
 
 public int direction = 1;
 public float speed = 3;
@@ -30,6 +31,7 @@ private float currentHealth;
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _healthBar = GetComponentInChildren<Slider>();
         _spriteRendered = GetComponent<SpriteRenderer>();
+        _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
 
     }
 
@@ -60,6 +62,8 @@ private float currentHealth;
         _boxCollider2D.enabled = false;
         _audioSource.PlayOneShot(_deathSFX);
         Destroy(gameObject, 1f);
+        _gameManager.AddGoomba();
+
     }
 
 
