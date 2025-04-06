@@ -14,9 +14,9 @@ public class DeathLine : MonoBehaviour
         _playerCotroller = FindObjectOfType<PlayerCotroller>().GetComponent<PlayerCotroller>();
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collider.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player"))
         {
             
             _playerCotroller.GameOverUI();

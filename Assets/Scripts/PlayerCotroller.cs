@@ -160,7 +160,8 @@ public class PlayerCotroller : MonoBehaviour
         //_soundManager.Invoke("DeathBGM", deathSFX.lenght);
 
         _gameManager.isPlaying = false;
-        Destroy(gameObject, 2);
+        StartCoroutine(GameOverScene());
+
     }
 
     void Shoot()
@@ -182,7 +183,7 @@ public class PlayerCotroller : MonoBehaviour
 
     public void GameOverUI()
     {
-        _boxCollider2D.enabled = false;
+        //_boxCollider2D.enabled = false;
         _soundManager.isGameOver = true;
         _soundManager.PauseBGM(); 
         StartCoroutine(GameOverScene());
@@ -195,6 +196,7 @@ public class PlayerCotroller : MonoBehaviour
     {
         _audioSource.PlayOneShot(deathSFX);
         yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
         SceneManager.LoadScene(2);
     }
 }
