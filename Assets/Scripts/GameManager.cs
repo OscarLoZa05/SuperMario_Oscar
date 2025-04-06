@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        coinsText.text = "Coins: " + coins.ToString();
+        coinsText.text = "x" + coins.ToString();
         goombaText.text = "x" + goombaNumber.ToString();
     }
     
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public void  AddCoins()
     {
         coins++;
-        coinsText.text = "Coins: " + coins.ToString(); 
+        coinsText.text = "x" + coins.ToString(); 
     }
 
     public void AddGoomba()
