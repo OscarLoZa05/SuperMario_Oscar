@@ -270,10 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916769333d2ae7544a396797fd5ad94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathSFX: {fileID: 8300000, guid: 08dd6d7ad013cc54bb2d4b4a28f1173f, type: 3}
+  _deathSFX: {fileID: 8300000, guid: 5c607e6b4c31f214db7ebe6f84aca5b1, type: 3}
+  _damageSFX: {fileID: 8300000, guid: 793b026dd43135d4686da68aaff92e58, type: 3}
   direction: 1
   speed: 2
-  maxHealth: 20
+  maxHealth: 1
 --- !u!95 &5994537567029630575
 Animator:
   serializedVersion: 5

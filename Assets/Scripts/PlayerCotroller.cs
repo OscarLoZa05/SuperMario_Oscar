@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PlayerCotroller : MonoBehaviour
 {
     //public int direction = 1;
     private float playerSpeed = 4.9f;
     private float inputHorizontal;
     private float jumpForce = 13f;
-    public float powerUpDuration = 100000f;
+    public float powerUpDuration = 10f;
     public float powerUpTimer;
+    public float delay = 3f;
     
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
     public bool canShoot = false;
+    
 
     private Rigidbody2D rigidBody; //componente del Mario variable de componentes
     
@@ -30,6 +33,7 @@ public class PlayerCotroller : MonoBehaviour
     public AudioClip jumpSFX;
     public AudioClip deathSFX;
     public AudioClip shootSFX;
+    public AudioClip _gameOverSFX;
 
     
     
@@ -174,6 +178,24 @@ public class PlayerCotroller : MonoBehaviour
             canShoot = false;
             powerUpTimer = 0;
         }
+    }
+
+    public void GameOverUI()
+    {
+        _boxCollider2D.enabled = false;
+        _soundManager.isGameOver = true;
+        _soundManager.PauseBGM(); 
+        StartCoroutine(GameOverScene());
+        
+        
+        
+    }
+
+    public IEnumerator GameOverScene()
+    {
+        _audioSource.PlayOneShot(deathSFX);
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(2);
     }
 }
 
