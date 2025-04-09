@@ -77,11 +77,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource.Stop();
         yield return new WaitForSeconds(delay);
-        /*_audioSource.PlayOneShot(gameOver); Por si acaso no funciona deja de comentar esto*/
+        //_audioSource.PlayOneShot(gameOver);
     }
-
-
-
-
 }
 

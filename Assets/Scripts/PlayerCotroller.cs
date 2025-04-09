@@ -12,6 +12,7 @@ public class PlayerCotroller : MonoBehaviour
     public float powerUpDuration = 10f;
     public float powerUpTimer;
     public float delay = 3f;
+    private float gameOverDelay = 3f;
     
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
@@ -58,7 +59,7 @@ public class PlayerCotroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_gameManager.isPlaying)
+        if(!_gameManager.isPlaying || _soundManager.isGameOver)
         {
             return;
         }
@@ -194,8 +195,11 @@ public class PlayerCotroller : MonoBehaviour
 
     public IEnumerator GameOverScene()
     {
+        //Destroy(_groundSensor.gameObject);
         _audioSource.PlayOneShot(deathSFX);
         yield return new WaitForSeconds(delay);
+        _audioSource.PlayOneShot(_gameOverSFX);
+        yield return new WaitForSeconds(gameOverDelay);
         Destroy(gameObject);
         SceneManager.LoadScene(2);
     }

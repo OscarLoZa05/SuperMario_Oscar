@@ -25,7 +25,7 @@ public class GroundSensor : MonoBehaviour
         else if(collider.gameObject.layer == 6)
         {
             Enemy _enemyScript = collider.gameObject.GetComponent<Enemy>();
-            _rigidBody.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
+            _rigidBody.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
             _enemyScript.TakeDamage(jumpDamage);
         }
     }
