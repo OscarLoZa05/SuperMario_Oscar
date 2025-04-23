@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deathSFX: {fileID: 8300000, guid: 5c607e6b4c31f214db7ebe6f84aca5b1, type: 3}
   _damageSFX: {fileID: 8300000, guid: 793b026dd43135d4686da68aaff92e58, type: 3}
-  direction: 1
+  direction: -1
   speed: 2
   maxHealth: 1
 --- !u!95 &5994537567029630575

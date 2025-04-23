@@ -226,8 +226,12 @@ MonoBehaviour:
   _misteryBoxSFX: {fileID: 8300000, guid: a4b9cd80a68fb2942bda002db705db7e, type: 3}
   _misteryBoxOpenSFX: {fileID: 8300000, guid: f72d5d5c9d1b5744b9b1744b52611faa, type: 3}
   mushroomSpawn: {fileID: 2969726803825614370}
-  mushroomPrefab: {fileID: 2710480212127605087, guid: e1fdf3ee4ee12534391498223a524dc1, type: 3}
-  _mushroomSFX: {fileID: 0}
+  mushroomPrefab:
+  - {fileID: 2710480212127605087, guid: e1fdf3ee4ee12534391498223a524dc1, type: 3}
+  - {fileID: 21182627453438601, guid: 512c3f3ec81ffa448975409144e2d5d1, type: 3}
+  - {fileID: 8546790587738025710, guid: 92b4506365d589a43861644a0768227e, type: 3}
+  powerUpIndex: 0
+  _mushroomSFX: {fileID: 8300000, guid: 2087ab8d6aa5ab6409b42937e8c84b52, type: 3}
 --- !u!82 &1208369305725161872
 AudioSource:
   m_ObjectHideFlags: 0

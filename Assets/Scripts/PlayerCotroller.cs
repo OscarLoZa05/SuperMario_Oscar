@@ -6,11 +6,15 @@ using UnityEngine.SceneManagement;
 public class PlayerCotroller : MonoBehaviour
 {
     //public int direction = 1;
+   
     private float playerSpeed = 4.9f;
     private float inputHorizontal;
-    private float jumpForce = 13f;
+    private float jumpForce = 13f; 
+    [Header("Hola")]
     public float powerUpDuration = 10f;
     public float powerUpTimer;
+
+    [Header("Adios")]
     public float delay = 3f;
     private float gameOverDelay = 3f;
     

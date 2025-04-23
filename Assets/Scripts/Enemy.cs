@@ -37,8 +37,6 @@ private float currentHealth;
 
     void Start()
     {
-        speed = 0;
-
         currentHealth = maxHealth;
         _healthBar.maxValue = maxHealth;
         _healthBar.value = maxHealth;
@@ -96,22 +94,22 @@ private float currentHealth;
         }
     }
 
-     void OnTriggerEnter2D(Collider2D collider)
-     {
+    void OnTriggerEnter2D(Collider2D collider)
+    {
         if(collider.gameObject.layer == 8)
         {
             direction *= -1;
         }
-     }
+    }
 
     void OnBecameVisible()
     {
-        speed = 3;
+        direction = 1;
     }
 
     void OnBecameInvisible()
     {
-        speed = 0;
+        direction = 0;
     }
 }
 

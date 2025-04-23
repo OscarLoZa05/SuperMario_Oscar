@@ -9,12 +9,18 @@ public class PrimerScript : MonoBehaviour
     private float numeroDecimal = 7.5f; // Variable para numeros decimales
     bool Boleana = true; // Variable de interruptor true o false
     string cadenaTexto = "Hola Mundo"; // Variable de texto
+    private int[] numeros = {75, 1, 3};
+    public int[] numeros2;
+    private int[ , ] numeros3 = {{7, 8, 98}, {9, 22, 45}}; //array de dos dimensiones, Se empieza a contrar a partir del 0
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(numeros[0]);
+        Debug.Log(numeros3[1,2]);
+
         Calculos();
     }
 
