@@ -7,6 +7,8 @@ public class GroundSensor : MonoBehaviour
     public bool isGrounded;
     private Rigidbody2D _rigidBody;
     public float jumpDamage = 15f;
+
+    public bool canDoubleJump = true;
     //private Enemy _enemyScript;
 
     void Awake()
@@ -19,6 +21,7 @@ public class GroundSensor : MonoBehaviour
         if(collider.gameObject.layer == 3)
         {
             isGrounded = true;
+            canDoubleJump = true;
             /*Debug.Log(collider.gameObject.name);*/
         }
         

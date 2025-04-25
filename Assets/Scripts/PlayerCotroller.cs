@@ -17,6 +17,25 @@ public class PlayerCotroller : MonoBehaviour
     [Header("Adios")]
     public float delay = 3f;
     private float gameOverDelay = 3f;
+
+    [SerializeField] private float _dashForce = 20;
+    [SerializeField] private float _dashDuration = 0.5f;
+    [SerializeField] private float _dashCoolDown = 1f;
+
+
+    private bool _canDash = true;
+    private bool _isDashing = false;
+
+    [SerializeField] private float _attackDamage = 10;
+    
+    [SerializeField] private float _attackRadius = 1; 
+    [SerializeField] private Transform _hitBoxPosition;
+
+    [SerializeField] private float _basedChargedAttackDamage = 15;
+    [SerializeField] private float _maxChargedAttackDamage = 40;
+    [SerializeField] private LayerMask _enemyLayer;
+
+    private float _chargedAttackDamage;
     
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
@@ -40,8 +59,9 @@ public class PlayerCotroller : MonoBehaviour
     public AudioClip shootSFX;
     public AudioClip _gameOverSFX;
 
-    
-    
+
+
+
     void Awake() //función de unity 
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -56,6 +76,8 @@ public class PlayerCotroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        _chargedAttackDamage = _basedChargedAttackDamage;
         //Esto teletransporta al personaje
         //transform.position = new Vector3 (-108.75f,-5.5f, 0);
     }
@@ -72,17 +94,46 @@ public class PlayerCotroller : MonoBehaviour
             return;
         }
 
+        if(_isDashing)
+        {
+            return;
+        }
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         
-        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded) //dos == es para comprobar, un = es para dar valor //si pongo !_groundSensor.isGorunded es para verificar si es falso si pone solo _groundSensor.isGorunded es para verificar si es verdadero
+        if(Input.GetButtonDown("Jump")) //dos == es para comprobar, un = es para dar valor //si pongo !_groundSensor.isGorunded es para verificar si es falso si pone solo _groundSensor.isGorunded es para verificar si es verdadero
         {
-            Jump();
+            if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
+            {
+                Jump();
+            }
+            
         }
         
+        if(Input.GetKeyDown(KeyCode.LeftShift) && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+        if(Input.GetButtonDown("Fire2"))
+        {
+            NormalAttack();
+        }
+
+        /*if(Input.GetButtonDown("Fire2"))
+        {
+            AttackCharge();
+        }
+
+        if(Input.GetButtonUp("Fire2"))
+        {
+            ChargedAttack(); 
+        }*/
+
 
         Movement();
 
-       _animator.SetBool("IsJumping", !_groundSensor.isGrounded); 
+        _animator.SetBool("IsJumping", !_groundSensor.isGrounded); 
         /*if(_groundSensor.isGrounded)
         {
             _animator.SetBool("IsJumping", false);        
@@ -114,6 +165,10 @@ public class PlayerCotroller : MonoBehaviour
     
     void FixedUpdate()
     {
+        if(_isDashing)
+        {
+            return;
+        }
         rigidBody.velocity = new Vector2(inputHorizontal * playerSpeed, rigidBody.velocity.y);
         //rigidBody.AddForce(new Vector2(inputHorizontal, 0));
         //rigidBody.MovePosition(new Vector2(100, 0));
@@ -140,6 +195,13 @@ public class PlayerCotroller : MonoBehaviour
 
     void Jump()
     {
+
+        if(!_groundSensor.isGrounded)
+        {
+            _groundSensor.canDoubleJump = false;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+
+        }
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         _animator.SetBool("IsJumping", true);
         //_audioSource.volume = 0.5f;
@@ -207,5 +269,73 @@ public class PlayerCotroller : MonoBehaviour
         Destroy(gameObject);
         SceneManager.LoadScene(2);
     }
+
+    IEnumerator Dash()
+    {
+        float gravity = rigidBody.gravityScale;
+        rigidBody.gravityScale = 0;
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x ,0); 
+        
+        
+        _isDashing = true;
+        _canDash = false;
+        rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(_dashDuration);
+        rigidBody.gravityScale = gravity;
+        _isDashing = false;
+        yield return new WaitForSeconds(_dashCoolDown);
+        _canDash = true;
+    }
+    
+
+    void NormalAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius,_enemyLayer);
+        foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_attackDamage);
+        }
+    }
+
+    void AttackCharge()
+    {
+        if(_chargedAttackDamage < _maxChargedAttackDamage)
+        {
+            _chargedAttackDamage += Time.deltaTime;
+            
+        }
+        else
+        {
+            _chargedAttackDamage = _maxChargedAttackDamage;
+        }
+
+    }
+
+    void ChargedAttack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+        foreach(Collider2D enemy in enemies)
+        {
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.TakeDamage(_chargedAttackDamage);
+        }
+
+        _chargedAttackDamage = _basedChargedAttackDamage;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+
+        Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
+    }
+
+
+
+
+
+
 }
 

@@ -67,7 +67,7 @@ private float currentHealth;
 
     public void TakeDamage(float damage)
     {
-        currentHealth-= damage;
+        currentHealth-= (int)damage;
         _healthBar.value = currentHealth;
         _audioSource.PlayOneShot(_damageSFX);
 
